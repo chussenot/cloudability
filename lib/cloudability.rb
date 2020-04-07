@@ -9,6 +9,7 @@ require 'cloudability/client/credentials'
 require 'cloudability/client/organizations'
 require 'cloudability/client/users'
 require 'cloudability/client/reserved_instances'
+require 'cloudability/client/vendors'
 
 require 'cloudability/version'
 
@@ -26,6 +27,7 @@ module Cloudability
     include Organizations
     include Users
     include ReservedInstances
+    include Vendors
 
     include HTTParty
 
@@ -71,6 +73,7 @@ module Cloudability
       opts[:headers] ||= {}
       opts[:headers]['User-Agent'] = "Cloudability-Ruby #{Cloudability::VERSION}"
       opts[:query][:auth_token] = @auth_token
+      opts[:basic_auth] = { username: @auth_token }
       opts
     end
 
